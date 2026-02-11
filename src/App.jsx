@@ -21,16 +21,16 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             {/* <Route path="/world-wis" element={<HomePage />} /> */}
-            <Route path="/app" element={<AppLayout />}>
+            <Route path="app" element={<AppLayout />}>
               <Route index element={<Navigate replace to="cities" />} />
               <Route path="cities" element={<CityList />} />
               <Route path="cities/:id" element={<City />} />
               <Route path="countries" element={<CountryList />} />
               <Route path="form" element={<Form />} />
             </Route>
-            <Route path="/products" element={<Product />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="products" element={<Product />} />
+            <Route path="pricing" element={<Pricing />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

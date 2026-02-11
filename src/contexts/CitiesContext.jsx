@@ -38,9 +38,48 @@ const CitesProvider = ({ children }) => {
     }
   };
 
+  const createdNewCity = async (newCity) => {
+    setIsLoading(true);
+    try {
+      await fetch(`${BASE_URL}`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setCities((cur) => [...cur, newCity]);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteCity = async (id) => {
+    setIsLoading(true);
+    try {
+      fetch(`${BASE_URL}/${id}`, {
+        method: "DELETE",
+      });
+      setCities((cur) => cur.filter((city) => city.id !== id));
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <CitesContext.Provider
-      value={{ cities, isLoading, fetchCurrentCity, currentCity }}
+      value={{
+        cities,
+        isLoading,
+        fetchCurrentCity,
+        currentCity,
+        createdNewCity,
+        deleteCity,
+      }}
     >
       {children}
     </CitesContext.Provider>
