@@ -6,14 +6,15 @@ import { useCities } from "../contexts/CitiesContext";
 
 function CityList() {
   const { cities, isLoading } = useCities();
+  // console.log();
 
   if (isLoading) return <Spinner />;
 
-  if (!cities.length) return <Message message={"add your frist city"} />;
+  // if (!cities.length) return <Message message={"add your frist city"} />;
 
   return (
     <ul className={styles.cityList}>
-      {cities.map((city) => (
+      {cities?.map((city) => (
         <CityItem key={city.id} city={city} />
       ))}
     </ul>

@@ -1,8 +1,11 @@
 import styles from "./Homepage.module.css";
 import PageNav from "../components/PageNav";
 import { Link } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Homepage() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <>
       <main className={styles.homepage}>
@@ -18,7 +21,7 @@ export default function Homepage() {
             of. Never forget your wonderful experiences, and show your friends
             how you have wandered the world.
           </h2>
-          <Link className="cta" to="app/cities">
+          <Link className="cta" to="/login">
             start
           </Link>
         </section>
