@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -74,18 +75,21 @@ const CitesProvider = ({ children }) => {
     fetchCities();
   }, []);
 
-  const fetchCurrentCity = async (id) => {
-    if (currentCity.id == id) return;
+  const fetchCurrentCity = useCallback(
+    async (id) => {
+      if (currentCity.id == id) return;
 
-    dispatch({ type: "loading" });
-    try {
-      const res = await fetch(`${BASE_URL}/${id}`);
-      const data = await res.json();
-      dispatch({ type: "city/loaded", payload: data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      dispatch({ type: "loading" });
+      try {
+        const res = await fetch(`${BASE_URL}/${id}`);
+        const data = await res.json();
+        dispatch({ type: "city/loaded", payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [currentCity.id],
+  );
 
   const createdNewCity = async (newCity) => {
     dispatch({ type: "loading" });
